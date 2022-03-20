@@ -1,14 +1,29 @@
 import express from "express";
 import dotenv from "dotenv";
+import morgan from "morgan";
+import { engine } from "express-handlebars";
 import connectDB from "./config/db.js";
+import routes from "./routes/index.js";
 
 // Load config
 dotenv.config({ path: `./config/.env` });
-
 // Connect to DB
 connectDB();
 
 const app = express();
+
+// Logging
+if (process.env.NODE_ENV === "development") {
+  app.use(morgan("dev"));
+}
+
+// Handlerbars
+app.engine(".hbs", engine({ defaultLayout: "main", extname: ".hbs" }));
+app.set("view engine", ".hbs");
+app.set("views", "./views");
+
+// Routes
+app.use("/", routes);
 
 const PORT = process.env.PORT || 5000;
 
