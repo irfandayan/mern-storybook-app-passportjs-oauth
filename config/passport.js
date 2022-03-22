@@ -1,6 +1,6 @@
 import GoogleStrategy1 from "passport-google-oauth20";
 import mongoose from "mongoose";
-import User from "../models/user.js";
+import User from "../models/User.js";
 
 const GoogleStrategy = GoogleStrategy1.Strategy;
 
