@@ -6,6 +6,7 @@ import morgan from "morgan";
 import { engine } from "express-handlebars";
 import passport from "passport";
 import session from "express-session";
+import MongoStore from "connect-mongo";
 import connectDB from "./config/db.js";
 import passportConfig from "./config/passport.js";
 import routes from "./routes/index.js";
@@ -38,6 +39,7 @@ app.use(
     secret: "keyboard cat",
     resave: false,
     saveUninitialized: false,
+    store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
   })
 );
 
