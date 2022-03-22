@@ -6,4 +6,7 @@
 <li>Cross-env - allows environment variables to be set in one way for every platform </li>
 <li>Dotenv - Load environment variables from .env file</li>
 <li>Morgan - HTTP request logger middleware for node.js</li>
+<li>Handlebars - View Engine</>
+<li>Passport.js - Google OAuth </li>
+<li>Express Session</li>
 </ul>

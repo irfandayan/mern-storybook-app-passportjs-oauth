@@ -9,6 +9,7 @@ import session from "express-session";
 import connectDB from "./config/db.js";
 import passportConfig from "./config/passport.js";
 import routes from "./routes/index.js";
+import authRoutes from "./routes/auth.js";
 
 // Load config
 dotenv.config({ path: `./config/.env` });
@@ -31,6 +32,15 @@ app.engine(".hbs", engine({ defaultLayout: "main", extname: ".hbs" }));
 app.set("view engine", ".hbs");
 app.set("views", "./views");
 
+// Sessions
+app.use(
+  session({
+    secret: "keyboard cat",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
@@ -42,6 +52,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Routes
 app.use("/", routes);
+app.use("/auth", authRoutes);
 
 const PORT = process.env.PORT || 5000;
 
