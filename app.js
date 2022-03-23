@@ -12,7 +12,14 @@ import passportConfig from "./config/passport.js";
 import routes from "./routes/index.js";
 import authRoutes from "./routes/auth.js";
 import storiesRoute from "./routes/stories.js";
-import { formatDate, truncate, stripTags, editIcon } from "./helpers/hbs.js";
+import methodOverride from "method-override";
+import {
+  formatDate,
+  truncate,
+  stripTags,
+  editIcon,
+  select,
+} from "./helpers/hbs.js";
 
 // Load config
 dotenv.config({ path: `./config/.env` });
@@ -27,6 +34,18 @@ const app = express();
 // Body parser middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+// Method override
+app.use(
+  methodOverride(function (req, res) {
+    if (req.body && typeof req.body === "object" && "_method" in req.body) {
+      // look in urlencoded POST bodies and delete it
+      let method = req.body._method;
+      delete req.body._method;
+      return method;
+    }
+  })
+);
 
 // Logging
 if (process.env.NODE_ENV === "development") {
@@ -44,6 +63,7 @@ app.engine(
       truncate,
       stripTags,
       editIcon,
+      select,
     },
     defaultLayout: "main",
     extname: ".hbs",
