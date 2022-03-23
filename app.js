@@ -12,6 +12,7 @@ import passportConfig from "./config/passport.js";
 import routes from "./routes/index.js";
 import authRoutes from "./routes/auth.js";
 import storiesRoute from "./routes/stories.js";
+import formatDate from "./helpers/hbs.js";
 
 // Load config
 dotenv.config({ path: `./config/.env` });
@@ -32,8 +33,19 @@ if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 
+// Handlerbars Helpers
+// format Date
 // Handlerbars
-app.engine(".hbs", engine({ defaultLayout: "main", extname: ".hbs" }));
+app.engine(
+  ".hbs",
+  engine({
+    helpers: {
+      formatDate,
+    },
+    defaultLayout: "main",
+    extname: ".hbs",
+  })
+);
 app.set("view engine", ".hbs");
 app.set("views", "./views");
 
