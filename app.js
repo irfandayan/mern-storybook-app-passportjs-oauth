@@ -12,7 +12,7 @@ import passportConfig from "./config/passport.js";
 import routes from "./routes/index.js";
 import authRoutes from "./routes/auth.js";
 import storiesRoute from "./routes/stories.js";
-import formatDate from "./helpers/hbs.js";
+import { formatDate, truncate, stripTags, editIcon } from "./helpers/hbs.js";
 
 // Load config
 dotenv.config({ path: `./config/.env` });
@@ -41,6 +41,9 @@ app.engine(
   engine({
     helpers: {
       formatDate,
+      truncate,
+      stripTags,
+      editIcon,
     },
     defaultLayout: "main",
     extname: ".hbs",
@@ -62,6 +65,12 @@ app.use(
 // Passport middleware
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Set global var
+app.use(function (req, res, next) {
+  res.locals.user = req.user || null;
+  next();
+});
 
 // Static folder
 const __filename = fileURLToPath(import.meta.url);
