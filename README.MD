@@ -1,3 +1,5 @@
+<a href="http://story-books-node-google-oauth.herokuapp.com/"> Live Site </a>
+
 <h2>Story Books Node Express App with Google OAuth </h2>
 
 <h3>Built in:</h3>
@@ -13,6 +15,6 @@
 <li>Materialize CSS</li>
 <li>CK Editor</li>
 <li>Moment.js - Formate date</li>
-<li></li>
+<li>Heroku Deployment</li>
 
 </ul>
