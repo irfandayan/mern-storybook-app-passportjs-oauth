@@ -11,6 +11,7 @@ import connectDB from "./config/db.js";
 import passportConfig from "./config/passport.js";
 import routes from "./routes/index.js";
 import authRoutes from "./routes/auth.js";
+import storiesRoute from "./routes/stories.js";
 
 // Load config
 dotenv.config({ path: `./config/.env` });
@@ -22,6 +23,9 @@ passportConfig(passport);
 connectDB();
 
 const app = express();
+// Body parser middleware
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
 // Logging
 if (process.env.NODE_ENV === "development") {
@@ -55,6 +59,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // Routes
 app.use("/", routes);
 app.use("/auth", authRoutes);
+app.use("/stories", storiesRoute);
 
 const PORT = process.env.PORT || 5000;
 

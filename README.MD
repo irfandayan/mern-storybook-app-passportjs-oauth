@@ -9,4 +9,9 @@
 <li>Handlebars - View Engine</>
 <li>Passport.js - Google OAuth </li>
 <li>Express Session</li>
+<li>Fontawesome Icons</li>
+<li>Materialize CSS</li>
+<li>CK Editor</li>
+<li>Moment.js - Formate date</li>
+
 </ul>
