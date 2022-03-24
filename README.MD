@@ -15,6 +15,8 @@
 <li>Materialize CSS</li>
 <li>CK Editor</li>
 <li>Moment.js - Formate date</li>
+<li>Connect Mongo</li>
+<li>Method Override</li>
 <li>Heroku Deployment</li>
 
 </ul>
