@@ -22,7 +22,7 @@ import {
 } from "./helpers/hbs.js";
 
 // Load config
-dotenv.config({ path: `./config/.env` });
+dotenv.config({ path: `./config/config.env` });
 
 // Passport config
 passportConfig(passport);
