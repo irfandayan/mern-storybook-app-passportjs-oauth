@@ -4,9 +4,6 @@ import User from "../models/User.js";
 
 const GoogleStrategy = GoogleStrategy1.Strategy;
 
-console.log("Google Client ID: " + process.env.GOOGLE_CLIENT_ID);
-console.log("Google Secrect ID: " + process.env.GOOGLE_CLIENT_SECRET);
-
 const passport = function (passport) {
   passport.use(
     new GoogleStrategy(
