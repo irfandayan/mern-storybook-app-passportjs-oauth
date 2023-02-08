@@ -36,6 +36,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // Method override
+// HTML only supports GET & POST --> https://stackoverflow.com/questions/5162960/should-put-and-delete-be-used-in-forms
+// Make use of PUT & DELETE methods by getting the hidden input field _method from client side
 app.use(
   methodOverride(function (req, res) {
     if (req.body && typeof req.body === "object" && "_method" in req.body) {
@@ -73,11 +75,14 @@ app.set("view engine", ".hbs");
 app.set("views", "./views");
 
 // Sessions
+// express-session --> https://www.youtube.com/watch?v=hKYjSgyCd60&t=194s
+// connect-mongo --> https://meghagarwal.medium.com/storing-sessions-with-connect-mongo-in-mongodb-64d74e3bbd9c
 app.use(
   session({
     secret: "keyboard cat",
     resave: false,
     saveUninitialized: false,
+    // create session store inside mongodb database
     store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
   })
 );
@@ -89,6 +94,7 @@ app.use(passport.session());
 // Set global var
 app.use(function (req, res, next) {
   res.locals.user = req.user || null;
+  // console.log("🚀 ~ file: app.js:97 ~  res.locals.user", res.locals.user);
   next();
 });
 
